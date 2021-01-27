@@ -1,0 +1,50 @@
+<mat-toolbar class="background" color="primary">
+  <div class="nav-bar-container">
+    <div class="left-part">
+      <!--      <button-->
+      <!--        mat-button-->
+      <!--        class="btn"-->
+      <!--        routerLink="/"-->
+      <!--        routerLinkActive="active"-->
+      <!--        [routerLinkActiveOptions]="{ exact: true }"-->
+      <!--      >-->
+      <!--        Дом-->
+      <!--      </button>-->
+
+      <button
+        mat-button
+        class="btn"
+        routerLink="/workout"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ 'tren' | translate }}
+      </button>
+    </div>
+
+    <div class="right-part">
+      <div>
+        <label>
+          {{ 'CHANGE_LANGUAGE' | translate }}
+          <select #langSelect (change)="translate.use(langSelect.value)">
+            <option
+              *ngFor="let lang of translate.getLangs()"
+              [value]="lang"
+              [selected]="lang === translate.currentLang"
+            >
+              {{ lang }}
+            </option>
+          </select>
+        </label>
+      </div>
+      <button
+        class="btn-exit"
+        mat-stroked-button
+        (click)="logout()"
+        routerLink="/login"
+      >
+        Выход
+      </button>
+    </div>
+  </div>
+</mat-toolbar>

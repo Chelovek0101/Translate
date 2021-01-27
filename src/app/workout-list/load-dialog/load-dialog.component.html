@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>{{ matDialogTitleText }}</h2>
+<mat-dialog-content [formGroup]="dialogForm">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Название тренировки*</mat-label>
+    <label>
+      <input
+        matInput
+        formControlName="title"
+        (ngModelChange)="titleChanging()"
+      />
+    </label>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Описание</mat-label>
+    <label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        formControlName="description"
+      ></textarea>
+    </label>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Дата тренировки</mat-label>
+    <label>
+      <input matInput [matDatepicker]="dp" formControlName="dateWorkout" />
+    </label>
+    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+    <mat-datepicker #dp></mat-datepicker>
+  </mat-form-field>
+  <file-upload
+    formControlName="videos"
+    [multiple]="false"
+    [animation]="false"
+  ></file-upload>
+</mat-dialog-content>
+<mat-dialog-actions class="mat-dialog-actions">
+  <button mat-flat-button mat-dialog-close="cancel" color="warn">Отмена</button>
+  <button
+    mat-raised-button
+    mat-dialog-close="{{ getFormFields() }}"
+    color="primary"
+    [disabled]="dialogForm.invalid || dialogForm.disabled"
+  >
+    {{ textAcceptButton }}
+  </button>
+</mat-dialog-actions>
+<div *ngIf="progressBarIsDisplay" class="mat-progress-bar-container">
+  <mat-progress-bar
+    class="mat-progress-bar"
+    mode="indeterminate"
+  ></mat-progress-bar>
+</div>

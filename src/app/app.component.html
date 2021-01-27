@@ -1,0 +1,32 @@
+<div class="page">
+  <header>
+    <app-nav-bar></app-nav-bar>
+  </header>
+  <main>
+    <div>
+      <h2>{{ 'CHANGE_LANGUAGE' | translate }}</h2>
+    </div>
+    <div>
+      <label>
+        {{ 'CHANGE_LANGUAGE' | translate }}
+        <select #langSelect (change)="translate.use(langSelect.value)">
+          <option
+            *ngFor="let lang of translate.getLangs()"
+            [value]="lang"
+            [selected]="lang === translate.currentLang"
+          >
+            {{ lang }}
+          </option>
+        </select>
+      </label>
+    </div>
+    <div>
+      <h2>Translation ({{ translate.currentLang }})</h2>
+      <pre>{{ translation$ | async | json }}</pre>
+    </div>
+    <router-outlet></router-outlet>
+  </main>
+  <!--  <footer>-->
+  <!--    <app-footer></app-footer>-->
+  <!--  </footer>-->
+</div>
